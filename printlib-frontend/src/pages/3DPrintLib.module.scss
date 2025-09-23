@@ -1,0 +1,22 @@
+@import '../styles/variables';
+
+.introContainer {
+  text-align: center;
+  margin-bottom: $spacing-lg;
+}
+
+.introLead {
+  font-size: 14px;
+  color: var(--color-text);
+  display: block;
+  margin-bottom: $spacing-sm;
+}
+
+.introTitle {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: -1.5px; // visually fuses '3D'
+  color: var(--color-primary);
+  font-family: $font-family;
+  display: block;
+}

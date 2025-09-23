@@ -22,3 +22,6 @@
   --color-border: #cccccc;
   --color-error: #cc0000;
 }
+body {
+  background-color: var(--color-background);
+}

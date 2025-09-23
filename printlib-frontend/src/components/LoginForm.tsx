@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './LoginForm.module.scss';
+import PrintLibIntro from '../pages/3DPrintLib';
+
 
 interface LoginFormProps {
   onLogin: (username: string, password: string) => void;
@@ -16,7 +18,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
-      <h2 className={styles.loginTitle}>Login to 3D PrintLib</h2>
+      <PrintLibIntro/>
       <input
         type="text"
         placeholder="Username"

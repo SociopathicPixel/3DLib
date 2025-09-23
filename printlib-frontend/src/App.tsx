@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import LoginForm from './components/LoginForm';
+import './styles/theme.scss';
 
 function App() {
+  useEffect(() => {
+    document.body.classList.remove('light-theme'); // default to dark
+  }, []);
+
+  const toggleTheme = () => {
+    document.body.classList.toggle('light-theme');
+  };
+
+  const handleLogin = (username: string, password: string) => {
+    console.log('Logging in with:', username, password);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      <LoginForm onLogin={handleLogin} />
     </div>
   );
 }
