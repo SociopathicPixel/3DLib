@@ -1,0 +1,24 @@
+/* Default Dark Theme */
+:root {
+  --color-primary: #00ff66;
+  --color-background: #1a1a1a;
+  --color-text: #e0ffe0;
+  --color-border: #006633;
+  --color-error: #ff3366;
+
+  --font-family: 'Press Start 2P', monospace;
+  --font-size-base: 16px;
+  --border-radius: 6px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+}
+
+/* Light Theme Overrides */
+.light-theme {
+  --color-primary: #0066ff;
+  --color-background: #ffffff;
+  --color-text: #222222;
+  --color-border: #cccccc;
+  --color-error: #cc0000;
+}

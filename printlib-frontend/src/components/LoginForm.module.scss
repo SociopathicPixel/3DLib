@@ -1,0 +1,33 @@
+@import '../styles/variables';
+
+.loginForm {
+  background-color: $background-dark;
+  color: $text-light;
+  font-family: $font-family;
+  padding: $spacing-lg;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+.loginInput {
+  background-color: $dark-green;
+  color: $text-light;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: $spacing-sm;
+  font-family: $font-family;
+}
+
+.loginButton {
+  background-color: $vibrant-green;
+  color: $background-dark;
+  border: none;
+  border-radius: $border-radius;
+  padding: $spacing-md;
+  font-family: $font-family;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($vibrant-green, 10%);
+  }
+}
