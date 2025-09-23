@@ -1,30 +1,19 @@
 package nl.pixel.printlib.domain.model.user.controller;
 
 import nl.pixel.printlib.domain.model.user.entity.User;
-import nl.pixel.printlib.domain.model.user.repository.UserRepository;
+import nl.pixel.printlib.domain.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 
 import java.util.Optional;
 
+@Controller
 public class UserController {
-
     @Autowired
-    UserRepository repository;
+    UserService service;
 
-    @Autowired
-    PasswordEncoder encoder;
+    public Optional<User> findByUsername(String username) { return service.findByUsername(username); }
+    public Optional<User> findByEmail(String email) { return service.findByEmail(email); }
+    public User register(User user) { return service.registerUser(user);}
 
-    public User setPassword(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        return user;
-    }
-
-    public Optional<User> findByUsername(String username) {
-        return repository.findByUsername(username);
-    }
-
-    public Optional<User> findByEmail(String email) {
-        return repository.findByEmail(email);
-    }
 }
