@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
@@ -42,8 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean isEncrypted(String password) {
-        // Our only check at this point is that the password length should be 60char long. (default HASH length)
-        // We should make sure that given passwords that are unencrypted cannot be this length.
-        return password.length() == 60;
+        return password != null && password.length() == 60 &&
+                (password.startsWith("$2a$") || password.startsWith("$2b$"));
     }
 }
