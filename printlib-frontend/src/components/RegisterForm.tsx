@@ -3,17 +3,17 @@ import PrintLibIntro from "../pages/3DPrintLib";
 import styles from './RegisterForm.module.scss';
 
 interface RegisterFormProps {
-  onRegister: (username: string, email: string, password: string) => void;
+  onRegister: (username: string, password: string, email: string) => void;
   onBack: () => void;
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onRegister(username, email, password);
+    onRegister(username, password, email);
   };
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
