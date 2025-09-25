@@ -5,9 +5,10 @@ import PrintLibIntro from '../pages/3DPrintLib';
 
 interface LoginFormProps {
   onLogin: (username: string, password: string) => void;
+  onRegister: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,7 +16,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
     e.preventDefault();
     onLogin(username, password);
   };
-
+  
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
       <PrintLibIntro/>
@@ -39,9 +40,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         required
         className={styles.loginInput}
       />
-      <button type={"submit" as "submit"} className={styles.loginButton}>
-        Login
-      </button>
+      <button type={"submit" as "submit"} className={styles.loginButton}>Login</button>
+      <button type={"register" as "button"} className={styles.registerButton} onClick={onRegister}>Click here to register!</button>
     </form>
   );
 };

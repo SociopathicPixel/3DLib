@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import LoginForm from './components/LoginForm';
+import {LoginForm} from './components/LoginForm';
+import {RegisterForm} from './components/RegisterForm';
+import { login, register } from './api/auth';
 import './styles/theme.scss';
-import { login } from './api/auth';
 
 function App() {
   useEffect(() => {
@@ -13,21 +14,45 @@ function App() {
   };
 
 
-const handleLogin = async (username: string, password: string) => {
-  try {
-    const result = await login(username, password);
-    console.log('Login success:', result);
-    // TODO: store token or redirect
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
-};
+  const handleLogin = async (username: string, password: string) => {
+    try {
+      const result = await login(username, password);
+      console.log('Login success:', result);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
 
+  const handleRegister = async (
+    username: string,
+    email: string,
+    password: string
+  ) => {
+    try {
+      const result = await register(username, email, password);
+      console.log("Registration success:", result);
+      setShowRegister(false); // go back to login
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
+  };
+
+  const [showRegister, setShowRegister] = React.useState(false);
 
   return (
     <div>
       <button onClick={toggleTheme}>Toggle Theme</button>
-      <LoginForm onLogin={handleLogin} />
+      {showRegister ? (
+        <RegisterForm 
+          onRegister={handleRegister}
+          onBack={() => setShowRegister(false)}
+        />
+      ) : (
+        <LoginForm
+          onLogin={handleLogin}
+          onRegister={() => setShowRegister(true)}
+        />
+      )}
     </div>
   );
 }
