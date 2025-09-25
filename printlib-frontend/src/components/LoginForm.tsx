@@ -8,7 +8,7 @@ interface LoginFormProps {
   onRegister: () => void;
 }
 
-export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -46,4 +46,4 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin, onRegister }) => 
   );
 };
 
-export default LoginForm;
+export default  LoginForm;

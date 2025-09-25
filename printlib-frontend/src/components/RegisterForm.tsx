@@ -7,7 +7,7 @@ interface RegisterFormProps {
   onBack: () => void;
 }
 
-export const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,3 +63,4 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }
     </form>
   );
 };
+export default RegisterForm;

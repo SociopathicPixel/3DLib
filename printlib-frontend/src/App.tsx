@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import {LoginForm} from './components/LoginForm';
-import {RegisterForm} from './components/RegisterForm';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 import { login, register } from './api/auth';
 import './styles/theme.scss';
 
