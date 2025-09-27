@@ -1,24 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
+import { login, register } from './api/auth';
+import './styles/theme.scss';
 
 function App() {
+  useEffect(() => {
+    document.body.classList.remove('light-theme'); // default to dark
+  }, []);
+
+  const toggleTheme = () => {
+    document.body.classList.toggle('light-theme');
+  };
+
+
+  const handleLogin = async (username: string, password: string) => {
+    try {
+      const result = await login(username, password);
+      console.log('Login success:', result);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
+
+  const handleRegister = async (
+    username: string,
+    email: string,
+    password: string
+  ) => {
+    try {
+      const result = await register(username, email, password);
+      console.log("Registration success:", result);
+      setShowRegister(false); // go back to login
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
+  };
+
+  const [showRegister, setShowRegister] = React.useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      {showRegister ? (
+        <RegisterForm 
+          onRegister={handleRegister}
+          onBack={() => setShowRegister(false)}
+        />
+      ) : (
+        <LoginForm
+          onLogin={handleLogin}
+          onRegister={() => setShowRegister(true)}
+        />
+      )}
     </div>
   );
 }
