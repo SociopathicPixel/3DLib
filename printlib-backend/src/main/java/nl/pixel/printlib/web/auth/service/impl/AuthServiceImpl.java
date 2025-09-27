@@ -19,12 +19,12 @@ public class AuthServiceImpl implements AuthService {
     PasswordEncoder encoder;
 
     @Override
-    public boolean authenticate(User user) {
-        logger.info("Authenticating user: {}", user.getUsername());
-        boolean result =  repository.findByUsername(user.getUsername())
-                .map(found -> encoder.matches(user.getPassword(), found.getPassword()))
+    public boolean authenticate(String username, String password) {
+        logger.info("Authenticating user: {}", username);
+        boolean result =  repository.findByUsername(username)
+                .map(found -> encoder.matches(password, found.getPassword()))
                 .orElse(false);
-        logger.info("Authentication result for {}: {}", user.getUsername(), result);
+        logger.info("Authentication result for {}: {}", username, result);
         return result;
     }
 

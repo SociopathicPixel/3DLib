@@ -1,6 +1,7 @@
 package nl.pixel.printlib.web.auth.controller;
 
 import nl.pixel.printlib.domain.model.user.entity.User;
+import nl.pixel.printlib.web.auth.payload.LoginRequest;
 import nl.pixel.printlib.web.auth.payload.RegisterRequest;
 import nl.pixel.printlib.web.auth.service.AuthService;
 import nl.pixel.printlib.web.auth.service.impl.AuthServiceImpl;
@@ -26,8 +27,8 @@ public class AuthRestController {
     BCryptPasswordEncoder encoder;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
-        boolean success = service.authenticate(user);
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        boolean success = service.authenticate(request.getUsername(), request.getPassword());
         if (success) {
             return ResponseEntity.ok("Login successful");
         } else {
@@ -38,11 +39,7 @@ public class AuthRestController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         logger.info("Registering user: username={}, email={}", request.getUsername(), request.getEmail());
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
-        user.setPassword(encoder.encode(request.getPassword())); // encode here
-
+        User user = new User(request.getUsername(), encoder.encode(request.getPassword()), request.getEmail());
         boolean success = service.register(user);
         if (success) {
             return ResponseEntity.ok("Registration successful");
