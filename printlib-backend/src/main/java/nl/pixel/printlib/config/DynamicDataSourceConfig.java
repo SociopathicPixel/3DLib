@@ -36,5 +36,4 @@ public class DynamicDataSourceConfig {
         ds.setPassword(password);
         return ds;
     }
-
 }
