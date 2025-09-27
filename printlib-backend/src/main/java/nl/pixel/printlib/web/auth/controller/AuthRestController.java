@@ -4,7 +4,6 @@ import nl.pixel.printlib.domain.model.user.entity.User;
 import nl.pixel.printlib.web.auth.payload.LoginRequest;
 import nl.pixel.printlib.web.auth.payload.RegisterRequest;
 import nl.pixel.printlib.web.auth.service.AuthService;
-import nl.pixel.printlib.web.auth.service.impl.AuthServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +46,4 @@ public class AuthRestController {
             return ResponseEntity.status(400).body("Username already exists");
         }
     }
-
 }
-

@@ -39,5 +39,4 @@ public class AuthServiceImpl implements AuthService {
         logger.info("User '{}' registered successfully", user.getUsername());
         return true;
     }
-
 }
