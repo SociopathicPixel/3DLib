@@ -1,6 +1,7 @@
 package nl.pixel.printlib.config;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,30 +11,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+@SuppressWarnings("unused")
 @Configuration
 public class DynamicDataSourceConfig {
 
-    private final String hostUrl = "jdbc:mysql://localhost:3306/";
-    private final String dbName = "3D-PrintLib";
-    private final String user = "root";
-    private final String password = "root";
+    @Autowired
+    DataSourceProperties properties;
 
     @Bean
     @ConditionalOnMissingBean
     public DataSource dataSource() {
         try (
-                Connection conn = DriverManager.getConnection(hostUrl + "?user=" + user + "&password=" + password);
+                Connection conn = DriverManager.getConnection(properties.getUrl()
+                        + "?user=" + properties.getUsername()
+                        + "&password=" + properties.getPassword());
                 Statement stmt = conn.createStatement()){
-            // Connect without specifying a database
-            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS `" + dbName + "`");
+            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS `" + properties.getDbName() + "`");
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create database: " + dbName, e);
+            throw new RuntimeException("Failed to create database: " + properties.getDbName(), e);
         }
-        // Now connect to the actual database
         HikariDataSource ds = new HikariDataSource();
-        ds.setJdbcUrl(hostUrl + dbName);
-        ds.setUsername(user);
-        ds.setPassword(password);
+        ds.setJdbcUrl(properties.getUrl() + properties.getDbName());
+        ds.setUsername(properties.getUsername());
+        ds.setPassword(properties.getPassword());
         return ds;
     }
 }
