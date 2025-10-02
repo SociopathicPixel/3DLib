@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PrintLibIntro from "../pages/3DPrintLib";
+import PrintLibIntro from "../../pages/3DPrintLib";
 import styles from './RegisterForm.module.scss';
 
 interface RegisterFormProps {
