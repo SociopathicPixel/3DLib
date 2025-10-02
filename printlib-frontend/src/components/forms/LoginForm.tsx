@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './LoginForm.module.scss';
-import PrintLibIntro from '../pages/3DPrintLib';
+import PrintLibIntro from '../../pages/3DPrintLib';
 
 
 interface LoginFormProps {

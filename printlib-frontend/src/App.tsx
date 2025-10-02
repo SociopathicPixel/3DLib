@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/forms/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import { login, register } from './api/auth';
 import './styles/theme.scss';
