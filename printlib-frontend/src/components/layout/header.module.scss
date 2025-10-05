@@ -54,3 +54,31 @@
     background: linear-gradient(to bottom, #ffffff 0%, #e0e0e0 100%);
     border: 1px solid #aaa;
 }
+
+.middleGroup {
+    flex: .8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.searchBar {
+    background-color: none;
+    color: var(--color-primary-dark);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    border-radius: $border-radius * 10;
+    width: 100%;
+    max-width: 1600px;
+    height: 40px;
+    opacity: 30%;
+    &:focus {
+        outline: none;
+        box-shadow: 0 4px 18px rgb(0, 0, 0);
+        border-color: var(--color-accent);
+        opacity: 50%;
+    }
+}   
