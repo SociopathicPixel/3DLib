@@ -11,37 +11,37 @@ const Header: React.FC = () => {
     <header className={styles.header}>
       <div className={styles.leftGroup}>
         <img src="./assets/app_logo.png" alt="Logo" className={styles.logo} />
-        {!isLandingPage ? (
-          <div>
+        {isLandingPage ? (
+          <>
             <button className={styles.iconButton} onClick={() => navigate("/explore")}>
-              <img src="./assets/explore_models.png" alt="Explore Models" className={styles.menu}/>
+              <img src="./assets/explore_models2.png" alt="Explore Models" className={styles.menu}/>
             </button>
             <button className={styles.iconButton} onClick={() => navigate("/collection")}>
-              <img src="./assets/my_collection.png" alt="My collection" className={styles.menu}/>
+              <img src="./assets/my_collection2.png" alt="My collection" className={styles.menu}/>
             </button>
             <button className={styles.iconButton} onClick={() => navigate("/add-model")}>
-              <img src="./assets/models_add.png" alt="Add Model" className={styles.menu}/>
+              <img src="./assets/models_add2.png" alt="Add Model" className={styles.menu}/>
             </button>
             <button className={styles.iconButton} onClick={() => navigate("/add-filament")}>
-              <img src="./assets/filament_add.png" alt="Add filament" className={styles.menu}/>
+              <img src="./assets/filament_add2.png" alt="Add filament" className={styles.menu}/>
             </button>
             <button className={styles.iconButton} onClick={() => navigate("/my-devices")}>
-              <img src="./assets/my_devices.png" alt="My devices" className={styles.menu} />
+              <img src="./assets/my_devices2.png" alt="My devices" className={styles.menu} />
             </button>
-          </div>
+          </>
         ) : ( <></>)}
       </div>
-      {isLandingPage ? (
+      {!isLandingPage ? (
         <div className={styles.middleGroup}>
           <input type="text" placeholder="Search..." className={styles.searchBar} />
         </div>
       ): ( <></>)}
       <div className={styles.rightGroup}>
         <button className={styles.iconButton} onClick={() => navigate("/profile")}>
-          <img src="./assets/user_profile.png" alt="User profile" className={styles.menu}/>
+          <img src="./assets/user_profile2.png" alt="User profile" className={styles.menu}/>
         </button>
         <button className={styles.iconButton} onClick={() => navigate("/settings")}>
-          <img src="./assets/app_settings.png" alt="App settings" className={styles.menu}/>
+          <img src="./assets/app_settings2.png" alt="App settings" className={styles.menu}/>
         </button>
       </div>
     </header>
