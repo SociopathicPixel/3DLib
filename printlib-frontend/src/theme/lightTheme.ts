@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material/styles';
-import shadows from '@mui/material/styles/shadows';
 
 export const lightTheme = createTheme({
   palette: {

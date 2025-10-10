@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 import { lightTheme, darkTheme } from "./theme";
 import AppRoutes from "./AppRoutes"; 
+import Header from "./components/Header";
 
 function App() {
   const [isLight, setIsLight] = useState(() => {
@@ -26,6 +27,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
+        <Header />
         <Button onClick={toggleTheme} variant="contained" sx={{ m: 2 }}>
           Toggle Theme
         </Button>

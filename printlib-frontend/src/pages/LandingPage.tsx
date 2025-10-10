@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Box } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 
 const LandingPage: React.FC = () => {
@@ -12,7 +12,6 @@ const LandingPage: React.FC = () => {
       <Typography variant="body1" text-color="secondary">
         Explore printable objects, manage your library, and start creating!
       </Typography>
-      {/* Add MUI buttons or feature highlights here */}
     </Container>
   );
 };
