@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import { lightTheme, darkTheme } from "./theme";
 import AppRoutes from "./AppRoutes";
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import { Box } from "@mui/material";
 
 function App() {
   const [isLight, setIsLight] = useState(() => {
@@ -25,14 +27,25 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Router>
-        <Header />
-        <Button onClick={toggleTheme} variant="contained" sx={{ m: 2 }}>
-          Toggle Theme
-        </Button>
-        <AppRoutes />
-      </Router>
+      <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+        <CssBaseline />
+        <Router>
+          <Header />
+          <Button onClick={toggleTheme} variant="contained" sx={{ m: 2 }}>
+            Toggle Theme
+          </Button>
+          <Box component="main" sx={{ flexGrow: 1 }}>
+            <AppRoutes />
+          </Box>
+          <Footer />
+        </Router>
+      </Box>
     </ThemeProvider>
   );
 }
