@@ -4,7 +4,6 @@ import { useLocation, Link } from "react-router-dom";
 import NavButton from "../NavButton";
 import { Explore, Collections, ViewInAr, NewLabel, ImportantDevices, Tune, ManageAccounts, Menu as MenuIcon } from "@mui/icons-material";
 
-
 const Header: React.FC = () => {
     const theme = useTheme();
     const location = useLocation();
