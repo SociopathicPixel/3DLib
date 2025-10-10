@@ -4,8 +4,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 import { lightTheme, darkTheme } from "./theme";
-import AppRoutes from "./AppRoutes"; 
-import Header from "./components/Header";
+import AppRoutes from "./AppRoutes";
+import Header from "./components/layout/Header";
 
 function App() {
   const [isLight, setIsLight] = useState(() => {

@@ -1,52 +1,109 @@
-import React from "react";
-import styles from "./header.module.scss";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, {useState} from "react";
+import { AppBar, Toolbar, Box, useMediaQuery, useTheme, List, IconButton, Drawer } from "@mui/material";
+import { useLocation, Link } from "react-router-dom";
+import NavButton from "./../NavButton";
+import { Explore, Collections, ViewInAr, NewLabel, ImportantDevices, Tune, ManageAccounts, Menu as MenuIcon } from "@mui/icons-material";
 
-const Header: React.FC = () => {  
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isLandingPage = location.pathname === "/landing";
 
-  return (
-    <header className={styles.header}>
-      <div className={styles.leftGroup}>
-        <img src="./assets/app_logo.png" alt="Logo" className={styles.logo} />
-        {isLandingPage ? (
-          <>
-            <button className={styles.iconButton} onClick={() => navigate("/explore")}>
-              <img src="./assets/explore_models2.png" alt="Explore Models" className={styles.menu}/>
-            </button>
-            <button className={styles.iconButton} onClick={() => navigate("/collection")}>
-              <img src="./assets/my_collection2.png" alt="My collection" className={styles.menu}/>
-            </button>
-            <button className={styles.iconButton} onClick={() => navigate("/add-model")}>
-              <img src="./assets/models_add2.png" alt="Add Model" className={styles.menu}/>
-            </button>
-            <button className={styles.iconButton} onClick={() => navigate("/add-filament")}>
-              <img src="./assets/filament_add2.png" alt="Add filament" className={styles.menu}/>
-            </button>
-            <button className={styles.iconButton} onClick={() => navigate("/my-devices")}>
-              <img src="./assets/my_devices2.png" alt="My devices" className={styles.menu} />
-            </button>
-          </>
-        ) : ( <></>)}
-      </div>
-      {!isLandingPage ? (
-        <div className={styles.middleGroup}>
-          <input type="text" placeholder="Search..." className={styles.searchBar} />
-        </div>
-      ): ( <></>)}
-      <div className={styles.rightGroup}>
-        <button className={styles.iconButton} onClick={() => navigate("/profile")}>
-          <img src="./assets/user_profile2.png" alt="User profile" className={styles.menu}/>
-        </button>
-        <button className={styles.iconButton} onClick={() => navigate("/settings")}>
-          <img src="./assets/app_settings2.png" alt="App settings" className={styles.menu}/>
-        </button>
-      </div>
-    </header>
-  );
+const Header: React.FC = () => {
+    const theme = useTheme();
+    const location = useLocation();
+    const mobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    if(location.pathname === "/login" || location.pathname === "/register") return null;
+    const navItemsLeft = [
+        { label: "Explore", icon: Explore, to: "/explore" },
+        { label: "Collection", icon: Collections, to: "/collection" },
+        { label: "Add Model", icon: ViewInAr, to: "/add_model" },
+        { label: "Add Filament", icon: NewLabel, to: "/add_filament" },
+        { label: "My devices", icon: ImportantDevices, to: "/my_devices" },
+    ];
+    const navItemsRight = [
+        { label: "Settings", icon: Tune, to: "/settings" },
+        { label: "My Profile", icon: ManageAccounts, to: "/profile" },
+    ];
+    const navItems = [...navItemsLeft, ...navItemsRight];
+
+    
+    return (
+      <AppBar position="static" color="primary">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          {/* DESKTOP VERSION */}
+          {!mobile && (
+            <>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                <Box
+                  component={Link}
+                  to="/landing"
+                  sx={{ display: "flex", alignItems: "center" }}
+                >
+                  <Box
+                    component="img"
+                    sx={{ height: 40, mr: 2 }}
+                    alt="3D PrintLib Logo"
+                    src="/assets/app_logo.png"
+                  />{" "}
+                </Box>
+                {navItemsLeft.map((item) => (
+                  <NavButton
+                    label={item.label}
+                    icon={item.icon}
+                    to={item.to}
+                    key={item.label}
+                  />
+                ))}
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                {navItemsRight.map((item) => (
+                  <NavButton
+                    label={item.label}
+                    icon={item.icon}
+                    to={item.to}
+                    key={item.label}
+                  />
+                ))}
+              </Box>
+            </>
+          )}
+          {/* MOBILE VERSION */}
+          {mobile && (
+            <>
+              <Box
+                component={Link}
+                to="/landing"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <Box
+                  component="img"
+                  sx={{ height: 40, mr: 2 }}
+                  alt="3D PrintLib Logo"
+                  src="/assets/app_logo.png"
+                />{" "}
+              </Box>
+              <IconButton color="inherit" onClick={() => setDrawerOpen(true)}>
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                anchor="right"
+                open={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+              >
+                <List>
+                  {navItems.map((item) => (
+                    <NavButton
+                      label={item.label}
+                      icon={item.icon}
+                      to={item.to}
+                      key={item.label}
+                    />
+                  ))}
+                </List>
+              </Drawer>
+            </>
+          )}
+        </Toolbar>
+      </AppBar>
+    );
 };
-
 
 export default Header;
