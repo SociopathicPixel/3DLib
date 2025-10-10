@@ -1,11 +1,13 @@
 import React from "react";
-import { Grid, Box, TextField } from "@mui/material";
+import { Grid, Box, TextField, useTheme, useMediaQuery } from "@mui/material";
 import TileButton from "../../components/TileButton";
 import TileButtonSmall from "../../components/TileButtonSmall";
 
 const HeroPage: React.FC = () => {
     type IconType = keyof typeof import("@mui/icons-material");
 
+    const theme = useTheme();
+    const mobile = useMediaQuery(theme.breakpoints.down("sm"));
     const TileNames: { label: string; icon: IconType; path: string }[] = [
     { label: "New Project", icon: "AddBox", path: "new-project" },
     { label: "My Collections", icon: "Collections", path: "collections" },
@@ -25,8 +27,7 @@ const HeroPage: React.FC = () => {
         <Grid container spacing={3}>
             {TileNames.map((tile, index) => (
             <Grid key={index} size={{sm:buttonSize}}>
-                {buttonSize < 4 && (<TileButtonSmall icon={tile.icon} path={tile.path}/>)} 
-                {buttonSize >= 4 && (<TileButton label={tile.label} icon={tile.icon} path={tile.path} />)}
+                {(buttonSize < 4 || mobile) ? (<TileButtonSmall icon={tile.icon} path={tile.path}/>):(<TileButton label={tile.label} icon={tile.icon} path={tile.path} />)}
             </Grid>
             ))}
         </Grid>

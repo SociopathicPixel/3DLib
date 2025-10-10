@@ -23,7 +23,7 @@ const TileButton: React.FC<TileButtonProps> = ({
       fullWidth
       sx={{
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "center",
         alignItems: "center",
         padding: 2,
         textTransform: "none",
