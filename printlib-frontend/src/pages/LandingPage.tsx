@@ -1,13 +1,12 @@
 import React from "react";
-import styles from "./LandingPage.module.scss"; // optional if you're styling
+import { Box } from "@mui/material";
+import HeroPage from "../components/layout/Hero";
 
 const LandingPage: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <h1>Welcome to 3D PrintLib</h1>
-      <p>Explore printable objects, manage your library, and start creating!</p>
-      {/* Add navigation buttons or feature highlights here */}
-    </div>
+    <Box component="main" sx={{ flexGrow: 1 }}>
+      <HeroPage />
+    </Box>
   );
 };
 
