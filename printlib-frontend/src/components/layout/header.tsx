@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { AppBar, Toolbar, Box, useMediaQuery, useTheme, List, IconButton, Drawer } from "@mui/material";
 import { useLocation, Link } from "react-router-dom";
-import NavButton from "./../NavButton";
+import NavButton from "../NavButton";
 import { Explore, Collections, ViewInAr, NewLabel, ImportantDevices, Tune, ManageAccounts, Menu as MenuIcon } from "@mui/icons-material";
 
 
