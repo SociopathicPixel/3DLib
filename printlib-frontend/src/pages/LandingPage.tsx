@@ -1,18 +1,13 @@
 import React from "react";
-import { Container, Typography } from "@mui/material";
-
+import styles from "./LandingPage.module.scss";
 
 const LandingPage: React.FC = () => {
   return (
-    <Container maxWidth="md" sx={{ mt: 8, textAlign: "center" }}>
-      <Typography variant="h3" color="primary">
-        Welcome to 3D PrintLib
-      </Typography>
-
-      <Typography variant="body1" text-color="secondary">
-        Explore printable objects, manage your library, and start creating!
-      </Typography>
-    </Container>
+    <div className={styles.container}>
+      <h1>Welcome to 3D PrintLib</h1>
+      <p>Explore printable objects, manage your library, and start creating!</p>
+      {/* Add navigation buttons or feature highlights here */}
+    </div>
   );
 };
 
