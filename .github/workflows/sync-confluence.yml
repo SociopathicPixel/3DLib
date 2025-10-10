@@ -1,0 +1,36 @@
+name: Sync Confluence Pages
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Daily at 8 AM
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      EMAIL: ${{ secrets.CONFLUENCE_EMAIL }}
+      TOKEN: ${{ secrets.CONFLUENCE_TOKEN }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests markdownify
+
+      - name: Run sync script
+        run: python sync_confluence.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update from Confluence" || echo "No changes"
+          git push
