@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './3DPrintLib.module.scss';
 
 export default function PrintLibIntro() {
