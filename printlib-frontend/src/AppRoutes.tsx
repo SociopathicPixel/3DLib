@@ -12,7 +12,7 @@ const AppRoutes: React.FC = () => {
     try {
       const result = await login(username, password);
       console.log("Login success:", result);
-      navigate("/landing");
+      navigate("/index");
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -53,7 +53,7 @@ const AppRoutes: React.FC = () => {
           />
         }
       />
-      <Route path="/landing" element={<LandingPage />} />
+      <Route path="/index" element={<LandingPage />} />
     </Routes>
   );
 };
