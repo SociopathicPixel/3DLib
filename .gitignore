@@ -37,3 +37,4 @@ out/
 .vscode/
 .gitattributes
 printlib-frontend/node_modules/
+.env
