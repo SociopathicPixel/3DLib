@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -26,8 +28,8 @@ public class AuthRestController {
     BCryptPasswordEncoder encoder;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        boolean success = service.authenticate(request.getUsername(), request.getPassword());
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) throws IOException {
+        boolean success = !service.authenticate(request.getUsername(), request.getPassword()).isEmpty();
         if (success) {
             return ResponseEntity.ok("Login successful");
         } else {

@@ -11,4 +11,6 @@ public interface AuthService {
     String authenticate(String username, String password) throws IOException;
     boolean validateToken(String token);
     String getUsernameFromToken(String token);
+
+    void delete(User user);
 }
