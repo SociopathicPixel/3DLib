@@ -9,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -37,6 +35,12 @@ public class AuthRestController {
         }
     }
 
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         logger.info("Registering user: username={}, email={}", request.getUsername(), request.getEmail());
@@ -47,5 +51,11 @@ public class AuthRestController {
         } else {
             return ResponseEntity.status(400).body("Username already exists");
         }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm(Model model){
+        model.addAttribute("user", new User());
+        return "register";
     }
 }
