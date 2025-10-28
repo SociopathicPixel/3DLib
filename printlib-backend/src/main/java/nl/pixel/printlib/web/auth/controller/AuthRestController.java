@@ -46,6 +46,9 @@ public class AuthRestController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        if (!service.validateNewPassword(request.getPassword(), request.getUsername())){
+            return ResponseEntity.status(422).body("Password does not comply with password requirements.");
+        }
         logger.info("Registering user: username={}, email={}", request.getUsername(), request.getEmail());
         User user = new User(request.getUsername(), encoder.encode(request.getPassword()), request.getEmail());
         boolean success = service.register(user);
