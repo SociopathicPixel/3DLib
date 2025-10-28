@@ -1,6 +1,5 @@
 package nl.pixel.printlib.web.auth.payload;
 
-
 import lombok.Getter;
 import lombok.Setter;
 

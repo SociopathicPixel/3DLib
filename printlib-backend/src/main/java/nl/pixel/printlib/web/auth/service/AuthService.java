@@ -2,7 +2,6 @@ package nl.pixel.printlib.web.auth.service;
 
 import nl.pixel.printlib.domain.model.user.entity.User;
 import org.springframework.web.bind.annotation.RequestBody;
-import nl.pixel.printlib.config.JwtUtil;
 
 import java.io.IOException;
 
