@@ -43,10 +43,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public boolean validateNewPassword(String password, String username) {
-        logger.debug("Validating password requirements.");
+        logger.info("Validating password requirements.");
         boolean characterCheck = PasswordSecurityUtil.validateNewPassword(password);
-        boolean userNameCheck = password.toLowerCase().contains(username.toLowerCase());
-        return characterCheck && userNameCheck;
+        boolean userNameCheck = !password.toLowerCase().contains(username.toLowerCase());
+        return (characterCheck && userNameCheck);
     }
 
     public String getUsernameFromToken(String token) {
