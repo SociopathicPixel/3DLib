@@ -28,14 +28,13 @@ public class AuthServiceImpl implements AuthService {
     UserService service;
 
     @Override
-    public String authenticate(String username, String password) throws IOException {
+    public boolean authenticate(String username, String password) throws IOException {
         logger.info("Authenticating user: {}", username);
         boolean result =  service.findByUsername(username)
                 .map(found -> encoder.matches(password, found.getPassword()))
                 .orElse(false);
         logger.info("Authentication result for {}: {}", username, result);
-        if (result) return jwtUtil.generateToken(username);
-        else throw new IOException("User does not exist");
+        return result;
     }
 
     public boolean validateToken(String token) {

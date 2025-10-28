@@ -4,17 +4,20 @@ import LoginForm from "./components/forms/LoginForm";
 import RegisterForm from "./components/forms/RegisterForm";
 import LandingPage from "./pages/LandingPage";
 import { login, register } from "./api/auth";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 const AppRoutes: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = async (username: string, password: string) => {
-    try {
-      const result = await login(username, password);
-      console.log("Login success:", result);
-      navigate("/landing");
-    } catch (error) {
-      console.error("Login failed:", error);
+    const response = await login(username, password);
+
+    if (response.status === 200) {
+      const data = response.data;
+      sessionStorage.setItem('authToken', data.token);
+      window.location.href = '/landing';
+    } else {
+      console.log("Login failed");
     }
   };
 
@@ -53,7 +56,14 @@ const AppRoutes: React.FC = () => {
           />
         }
       />
-      <Route path="/landing" element={<LandingPage />} />
+      <Route
+        path="/*"
+        element={
+          <ProtectedRoute>
+            <LandingPage />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };

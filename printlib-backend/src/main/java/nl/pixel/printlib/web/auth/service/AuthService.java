@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public interface AuthService {
     boolean register(@RequestBody User user);
-    String authenticate(String username, String password) throws IOException;
+    boolean authenticate(String username, String password) throws IOException;
     boolean validateToken(String token);
     String getUsernameFromToken(String token);
 

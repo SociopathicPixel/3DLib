@@ -1,7 +1,9 @@
 package nl.pixel.printlib.web.auth.controller;
 
+import nl.pixel.printlib.config.JwtUtil;
 import nl.pixel.printlib.domain.model.user.entity.User;
 import nl.pixel.printlib.web.auth.payload.LoginRequest;
+import nl.pixel.printlib.web.auth.payload.LoginResponse;
 import nl.pixel.printlib.web.auth.payload.RegisterRequest;
 import nl.pixel.printlib.web.auth.service.AuthService;
 import org.slf4j.Logger;
@@ -24,12 +26,13 @@ public class AuthRestController {
     AuthService service;
     @Autowired
     BCryptPasswordEncoder encoder;
+    @Autowired
+    JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) throws IOException {
-        boolean success = !service.authenticate(request.getUsername(), request.getPassword()).isEmpty();
-        if (success) {
-            return ResponseEntity.ok("Login successful");
+        if (service.authenticate(request.getUsername(), request.getPassword())) {
+            return ResponseEntity.ok(new LoginResponse(jwtUtil.generateToken(request.getUsername())));
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
