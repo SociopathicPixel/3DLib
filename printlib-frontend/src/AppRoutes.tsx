@@ -15,7 +15,7 @@ const AppRoutes: React.FC = () => {
     if (response.status === 200) {
       const data = response.data;
       sessionStorage.setItem('authToken', data.token);
-      window.location.href = '/landing';
+      window.location.href = '/index';
     } else {
       console.log("Login failed");
     }
