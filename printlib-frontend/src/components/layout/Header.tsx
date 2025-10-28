@@ -33,7 +33,7 @@ const Header: React.FC = () => {
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Box
                   component={Link}
-                  to="/landing"
+                  to="/index"
                   sx={{ display: "flex", alignItems: "center" }}
                 >
                   <Box
@@ -69,7 +69,7 @@ const Header: React.FC = () => {
             <>
               <Box
                 component={Link}
-                to="/landing"
+                to="/index"
                 sx={{ display: "flex", alignItems: "center" }}
               >
                 <Box
