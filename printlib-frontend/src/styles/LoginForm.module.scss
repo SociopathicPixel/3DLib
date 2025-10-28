@@ -1,18 +1,8 @@
-@import './variables';
-@import './forms.module.scss';
+@use './Forms.module.scss';
+@use './variables' as *;
 
 .loginForm {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: $font-family;
-  padding: $spacing-lg;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  display: flex;
-  flex-direction: column;
-  gap: $spacing-md;
-  max-width: 400px;
-  margin: 0 auto;
+  @extend %defaultFormStyle;
 }
 
 .loginTitle {
@@ -22,39 +12,21 @@
 }
 
 .loginInput {
-  background-color: var(--color-border);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  border-radius: $border-radius;
-  padding: $spacing-sm;
-  font-family: $font-family;
-  font-size: $font-size-base;
+  @extend %inputFieldStyle;
 }
 
 .loginButton {
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  border: none;
-  border-radius: $border-radius;
+  @extend %registerButton;
   padding: $spacing-md;
-  font-family: $font-family;
   font-size: $font-size-base;
-  cursor: pointer;
   &:hover {
     filter: brightness(0.7);
   }
 }
 .registerButton {
-  flex: 1;
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  border: none;
-  border-radius: $border-radius;
+  @extend %registerButton;
   padding: $spacing-md * 0.5;
-  font-family: $font-family;
   font-size: $font-size-base * 0.6;
-  cursor: pointer;
-
   &:hover {
     filter: brightness(0.7);
   }

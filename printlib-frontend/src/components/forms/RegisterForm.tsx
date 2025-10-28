@@ -37,7 +37,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
             setUsername((e.target as HTMLInputElement).value)
           }
           required
-          className={styles.loginInput}
+          className={styles.registerInput}
         />
         <input
           type="email"
@@ -47,7 +47,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
             setEmail((e.target as HTMLInputElement).value)
           }
           required
-          className={styles.loginInput}
+          className={styles.registerInput}
         />
         <input
           type="password"
@@ -57,7 +57,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegister, onBack }) => {
             setPassword((e.target as HTMLInputElement).value)
           }
           required
-          className={styles.loginInput}
+          className={styles.registerInput}
         />
         <div className={styles.buttonRow}>
           <button
