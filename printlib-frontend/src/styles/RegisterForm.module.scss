@@ -1,0 +1,101 @@
+@import './variables';
+@import './LoginForm.module.scss';
+
+.registerContainer {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: $font-family;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    
+    display: inline-flex;
+    height: auto;
+    width: fit-content;
+    align-items: stretch;
+    justify-content: center;
+    gap: $spacing-md;
+    margin: 0 auto;
+}
+
+.registerForm {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: $font-family;
+    padding: $spacing-lg;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.passwordRequirementsInformation {
+    flex: 1;
+    font-size: $font-size-sm *0.8;
+    display: inline;
+    padding: $spacing-lg;
+    gap: $spacing-md;
+}
+.passwordChecklist {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    gap: $spacing-sm;
+}
+
+.check {
+    color: green;
+    font-weight: bolder;
+    font-size: $font-size-base * 1.2;
+}
+
+.cross {
+    color: red;
+    font-weight: bolder;
+    font-size: $font-size-base * 1.2;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px; // optional: controls spacing between buttons
+}
+
+.registerButton {
+    flex: 1;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: $border-radius;
+    padding: $spacing-md;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    cursor: pointer;
+    &:hover {
+        filter: brightness(0.3);
+    }
+    &:disabled {
+        opacity: 0.1;
+        cursor: not-allowed;
+    }
+}
+
+.backButton {
+    background-color: var(--color-border);
+    color: var(--color-background);
+    border: none;
+    border-radius: $border-radius;
+    padding: $spacing-md;
+    font-family: $font-family;
+    font-size: $font-size-base;
+    cursor: pointer;
+    transition: background-color 1s ease;
+    &:hover {
+        filter: brightness(0.6);
+    }
+
+    flex: 0 0 auto; // fixed size
+}
