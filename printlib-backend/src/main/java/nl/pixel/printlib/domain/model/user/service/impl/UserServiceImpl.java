@@ -30,8 +30,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void delete(User user) {
+        repository.delete(user);
+    }
+
+    @Override
     @Transactional
     public User registerUser(User user) throws UserRegistrationException {
+        if (repository.findByEmail(user.getEmail()).isPresent()){
+            throw new UserRegistrationException("User already registered!");
+        };
         if (!isEncrypted(user.getPassword())) {
             user.setPassword(encoder.encode(user.getPassword()));
         }

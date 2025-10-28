@@ -1,7 +1,9 @@
 package nl.pixel.printlib.web.auth.controller;
 
+import nl.pixel.printlib.config.JwtUtil;
 import nl.pixel.printlib.domain.model.user.entity.User;
 import nl.pixel.printlib.web.auth.payload.LoginRequest;
+import nl.pixel.printlib.web.auth.payload.LoginResponse;
 import nl.pixel.printlib.web.auth.payload.RegisterRequest;
 import nl.pixel.printlib.web.auth.service.AuthService;
 import org.slf4j.Logger;
@@ -9,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 
 @RestController
@@ -24,15 +26,22 @@ public class AuthRestController {
     AuthService service;
     @Autowired
     BCryptPasswordEncoder encoder;
+    @Autowired
+    JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        boolean success = service.authenticate(request.getUsername(), request.getPassword());
-        if (success) {
-            return ResponseEntity.ok("Login successful");
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) throws IOException {
+        if (service.authenticate(request.getUsername(), request.getPassword())) {
+            return ResponseEntity.ok(new LoginResponse(jwtUtil.generateToken(request.getUsername())));
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
     }
 
     @PostMapping("/register")
@@ -45,5 +54,11 @@ public class AuthRestController {
         } else {
             return ResponseEntity.status(400).body("Username already exists");
         }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm(Model model){
+        model.addAttribute("user", new User());
+        return "register";
     }
 }
