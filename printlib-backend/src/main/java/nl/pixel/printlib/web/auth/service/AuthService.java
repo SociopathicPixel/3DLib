@@ -9,7 +9,9 @@ public interface AuthService {
     boolean register(@RequestBody User user);
     boolean authenticate(String username, String password) throws IOException;
     boolean validateToken(String token);
+    boolean validateNewPassword(String password, String username);
     String getUsernameFromToken(String token);
 
     void delete(User user);
+
 }

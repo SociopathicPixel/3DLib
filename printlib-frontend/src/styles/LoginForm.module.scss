@@ -1,0 +1,33 @@
+@use './Forms.module.scss';
+@use './variables' as *;
+
+.loginForm {
+  @extend %defaultFormStyle;
+}
+
+.loginTitle {
+  font-size: $font-size-lg;
+  text-align: center;
+  margin-bottom: $spacing-md;
+}
+
+.loginInput {
+  @extend %inputFieldStyle;
+}
+
+.loginButton {
+  @extend %registerButton;
+  padding: $spacing-md;
+  font-size: $font-size-base;
+  &:hover {
+    filter: brightness(0.7);
+  }
+}
+.registerButton {
+  @extend %registerButton;
+  padding: $spacing-md * 0.5;
+  font-size: $font-size-base * 0.6;
+  &:hover {
+    filter: brightness(0.7);
+  }
+}

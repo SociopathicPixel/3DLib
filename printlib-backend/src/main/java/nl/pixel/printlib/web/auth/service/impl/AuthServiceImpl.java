@@ -4,6 +4,7 @@ import nl.pixel.printlib.config.JwtUtil;
 import nl.pixel.printlib.domain.model.user.entity.User;
 import nl.pixel.printlib.domain.model.user.exception.UserRegistrationException;
 import nl.pixel.printlib.domain.model.user.service.UserService;
+import nl.pixel.printlib.util.PasswordSecurityUtil;
 import nl.pixel.printlib.web.auth.service.AuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,14 @@ public class AuthServiceImpl implements AuthService {
 
     public boolean validateToken(String token) {
         return jwtUtil.validateToken(token);
+    }
+
+    @Override
+    public boolean validateNewPassword(String password, String username) {
+        logger.info("Validating password requirements.");
+        boolean characterCheck = PasswordSecurityUtil.validateNewPassword(password);
+        boolean userNameCheck = !password.toLowerCase().contains(username.toLowerCase());
+        return (characterCheck && userNameCheck);
     }
 
     public String getUsernameFromToken(String token) {
