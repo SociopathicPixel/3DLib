@@ -3,8 +3,10 @@ import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import LoginForm from "./components/forms/LoginForm";
 import RegisterForm from "./components/forms/RegisterForm";
 import LandingPage from "./pages/LandingPage";
+import PageAccount from "./pages/PageAccount";
 import { login, register } from "./api/auth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import HeroPage from "./components/layout/Hero";
 
 const AppRoutes: React.FC = () => {
   const navigate = useNavigate();
@@ -56,6 +58,8 @@ const AppRoutes: React.FC = () => {
           />
         }
       />
+      <Route path="/index" element={<HeroPage />} />
+      <Route path="/account" element={<PageAccount />} />
       <Route
         path="/*"
         element={

@@ -19,7 +19,7 @@ const Header: React.FC = () => {
     ];
     const navItemsRight = [
         { label: "Settings", icon: Tune, to: "/settings" },
-        { label: "My Profile", icon: ManageAccounts, to: "/profile" },
+        { label: "My Profile", icon: ManageAccounts, to: "/account" },
     ];
     const navItems = [...navItemsLeft, ...navItemsRight];
 

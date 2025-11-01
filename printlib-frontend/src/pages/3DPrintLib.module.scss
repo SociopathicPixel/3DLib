@@ -17,6 +17,6 @@
   font-weight: bold;
   letter-spacing: -1.5px; // visually fuses '3D'
   color: var(--color-primary);
-  font-family: $font-family;
+  font-family: var(--font-family);
   display: block;
 }

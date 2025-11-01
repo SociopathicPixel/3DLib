@@ -11,11 +11,11 @@ export const lightTheme = createTheme({
     },
     text: {
       primary: '#000000',
-      
+      secondary: '#003300',
     },
   },
   typography: {
-    fontFamily: 'Inter, sans-serif',
+    fontFamily: "'Press Start 2P', monospace",
     button: { textTransform: 'none' },
   },
 });

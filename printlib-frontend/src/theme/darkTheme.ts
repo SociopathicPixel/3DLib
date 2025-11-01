@@ -15,7 +15,7 @@ export const darkTheme = createTheme({
       },
   },
   typography: {
-    fontFamily: 'Press Start 2P, monospace',
+    fontFamily: "'Press Start 2P', monospace",
     button: { textTransform: 'none' },
   },
 });
