@@ -4,6 +4,7 @@ import nl.pixel.printlib.domain.model.user.entity.User;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public interface AuthService {
     boolean register(@RequestBody User user);
@@ -14,4 +15,5 @@ public interface AuthService {
 
     void delete(User user);
 
+    Optional<User> getUserByUsername(String username);
 }

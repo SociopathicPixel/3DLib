@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 @RestController
@@ -32,7 +33,14 @@ public class AuthRestController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) throws IOException {
         if (service.authenticate(request.getUsername(), request.getPassword())) {
-            return ResponseEntity.ok(new LoginResponse(jwtUtil.generateToken(request.getUsername())));
+            Optional<User> optUser = service.getUserByUsername(request.getUsername());
+            if (optUser.isPresent()) {
+                LoginResponse response = new LoginResponse(jwtUtil.generateToken(request.getUsername()), request.getUsername(), optUser.get().getEmail());
+                logger.info("Sending LoginResponse: {}", response);
+                return ResponseEntity.ok(response);
+            } else {
+                return ResponseEntity.status(404).body("User has not been found");
+            }
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }

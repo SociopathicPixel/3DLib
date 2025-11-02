@@ -12,7 +12,7 @@ interface TileButtonProps {
 
 const TileButton: React.FC<TileButtonProps> = ({
   label,
-  icon : icon,
+  icon,
   path,
   onClick,
   variant = "contained",

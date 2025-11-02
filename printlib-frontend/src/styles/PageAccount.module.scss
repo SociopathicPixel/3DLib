@@ -16,6 +16,7 @@
 
 .accountBasic {
     display: flex;
+    flex-direction: row;
     margin: var(--spacing-md);
 }
 
@@ -28,10 +29,25 @@
     object-fit: cover;
 }
 
-div#key {
-    align-content: left;
+#accountBasicInfoRow {
+    border-bottom-width: 2px;
 }
-div#value {
-    text-align: right;
+
+#keyColumn {
+    display: block;
+    font-weight: lighter;
+    margin-right: var(--spacing-sm);
+    margin-bottom: 0px;
+    opacity: 0.4;
+    font-size: 120%;
+    border-bottom-style: solid;
+    border-color: var(--color-primary);
+}
+
+#valueColumn {
+    margin-bottom: 0px;
     font-weight: bold;
+    font-size: 150%;
+    border-bottom-style: dashed;
+    border-color: var(--color-primary);
 }

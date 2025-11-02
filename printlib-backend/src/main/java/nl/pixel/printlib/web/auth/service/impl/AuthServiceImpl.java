@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -56,6 +57,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void delete(User user) {
         service.delete(user);
+    }
+
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return service.findByUsername(username);
     }
 
     @Override
