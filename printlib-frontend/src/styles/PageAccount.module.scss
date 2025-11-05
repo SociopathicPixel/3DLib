@@ -51,3 +51,24 @@
     border-bottom-style: dashed;
     border-color: var(--color-primary);
 }
+
+.accountSettings {
+    display: flex;
+    flex-direction: row;
+    margin: var(--spacing-lg); gap: 2;
+    content: justify
+}
+
+.passwordChange {
+    margin-top: var(--spacing-lg);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.accountDelete {
+    margin-top: var(--spacing-lg);
+    font-weight: bold;
+    align-content: right;
+    cursor: pointer;
+    display: flex; gap: 2;
+}
