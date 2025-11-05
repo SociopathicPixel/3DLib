@@ -35,6 +35,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User update(User user) {
+        if (repository.findByEmail(user.getEmail()).isPresent()){
+            if (!isEncrypted(user.getPassword())) {
+                user.setPassword(encoder.encode(user.getPassword()));
+            }
+            User savedUser = repository.save(user);
+            if (savedUser.getId() == null) {
+                throw new UserRegistrationException("User data could not be saved!");
+            }
+            return savedUser;
+        }
+        throw new UserRegistrationException("User isn't registered!");
+
+    }
+
+    @Override
     @Transactional
     public User registerUser(User user) throws UserRegistrationException {
         if (repository.findByEmail(user.getEmail()).isPresent()){
