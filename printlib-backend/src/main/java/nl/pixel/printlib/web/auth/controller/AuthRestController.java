@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -72,4 +73,5 @@ public class AuthRestController {
         model.addAttribute("user", new User());
         return "register";
     }
+
 }

@@ -5,6 +5,8 @@ import nl.pixel.printlib.domain.model.user.entity.User;
 import nl.pixel.printlib.domain.model.user.repository.PasswordResetTokenRepository;
 import nl.pixel.printlib.domain.model.user.service.UserService;
 import nl.pixel.printlib.util.email.service.EmailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/auth")
 public class PasswordResetController {
 
+    Logger logger = LoggerFactory.getLogger(PasswordResetController.class);
+
     @Autowired
-    EmailService service;
+    EmailService mailService;
     @Autowired
     UserService userService;
 
@@ -31,12 +36,15 @@ public class PasswordResetController {
 
     @PostMapping("/request-reset")
     public ResponseEntity<?> requestPasswordReset(@RequestBody Map<String, String> payload) {
+        logger.info("creating email for password reset");
         String email = payload.get("email");
         String token = UUID.randomUUID().toString();
 
         tokenRepository.save(new PasswordResetToken(email, token, LocalDateTime.now().plusHours(1)));
+        logger.info("SENDER: " + mailService.getSender());
+        logger.info("EMAIL: " + email);
 
-        service.sendPasswordResetMail(email, token);
+        mailService.sendPasswordResetMail(email, token);
         return ResponseEntity.ok("Password reset email sent");
     }
 
@@ -55,4 +63,22 @@ public class PasswordResetController {
         tokenRepository.delete(Objects.requireNonNull(tokenRepository.findByToken(token).orElse(null))); // Invalidate token
         return ResponseEntity.ok("Password updated successfully");
     }
+
+    @PostMapping("/verify-reset-token")
+    public ResponseEntity<?> verifyResetToken(@RequestBody Map<String, String> payload) {
+        String urlToken = payload.get("token");
+        String email = payload.get("email");
+        Optional<PasswordResetToken> dbToken = tokenRepository.findByToken(urlToken);
+        if (dbToken.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        if (!dbToken.get().getEmail().equals(email)){
+            return ResponseEntity.badRequest().body("Token does not belong to the given e-mail address.");
+        }
+        if (dbToken.get().getExpDate().isBefore(LocalDateTime.now())){
+            return ResponseEntity.badRequest().body("Token has expired!");
+        }
+        return ResponseEntity.ok("Token is verified.");
+    }
 }
+

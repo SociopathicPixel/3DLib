@@ -24,4 +24,9 @@ public class EmailServiceImpl implements EmailService {
         message.setFrom(sender);
         mailSender.send(message);
     }
+
+    @Override
+    public String getSender() {
+        return sender;
+    }
 }

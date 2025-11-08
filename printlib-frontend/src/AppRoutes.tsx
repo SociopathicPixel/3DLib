@@ -4,6 +4,7 @@ import LoginForm from "./components/forms/LoginForm";
 import RegisterForm from "./components/forms/RegisterForm";
 import LandingPage from "./pages/LandingPage";
 import PageAccount from "./pages/PageAccount";
+import PageResetPassword from "./pages/PageResetPassword";
 import { login, register } from "./api/auth";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import HeroPage from "./components/layout/Hero";
@@ -60,16 +61,10 @@ const AppRoutes: React.FC = () => {
           />
         }
       />
-      <Route path="/index" element={<HeroPage />} />
-      <Route path="/account" element={<PageAccount />} />
-      <Route
-        path="/*"
-        element={
-          <ProtectedRoute>
-            <LandingPage />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/index"          element={<ProtectedRoute> <HeroPage />          </ProtectedRoute>} />
+      <Route path="/account"        element={<ProtectedRoute> <PageAccount />       </ProtectedRoute>} />
+      <Route path="/reset-password" element={<ProtectedRoute> <PageResetPassword /> </ProtectedRoute>} />
+      <Route path="/*"              element={<ProtectedRoute> <LandingPage />       </ProtectedRoute>}/>
     </Routes>
   );
 };

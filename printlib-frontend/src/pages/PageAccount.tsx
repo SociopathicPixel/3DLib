@@ -8,10 +8,10 @@ import '../styles/theme.scss';
 const PageAccount: React.FC = () => {
   return (
     <Box component="main" sx={{ flexGrow: 1 }}>
-        <Box className={styles.accountInformation}>
-            < AccountBasics />
-            < AccountSettings />
-        </Box>
+      <Box className={styles.accountInformation}>
+        <AccountBasics />
+        <AccountSettings />
+      </Box>
     </Box>
   );
 };
